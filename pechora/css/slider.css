@@ -1,0 +1,49 @@
+.slider_wrap {
+	position: relative;
+	float: right;
+	width: 610px;
+	height: 469px;
+	overflow:hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.slider_wrap img {
+	position:absolute;
+	width: 560px;
+	height:auto;
+	display:none;
+	top: 25px;
+	left: 25px;
+}
+
+.slider_wrap img:first-child {
+	display:block;
+}
+.slider_wrap span {
+	margin-top:-13px;
+	width:15px;
+	height:26px;
+	display:block;
+	position:absolute;
+	top:50%;
+	cursor:pointer;
+	background:url(../images/slider2_arrow.png) no-repeat;
+}
+
+.slider_wrap span.next {
+	right: 5px;
+	background-position:-15px 0;
+}
+
+.slider_wrap span.next:hover {
+	background-position:-15px -26px;
+}
+
+.slider_wrap span.prev {
+	left: 5px;
+	background-position: 0 0;
+}
+
+.slider_wrap span.prev:hover {
+	background-position: 0 -26px;
+}
