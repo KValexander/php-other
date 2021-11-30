@@ -26,7 +26,6 @@
 				$author_id,
 				$publisher_id
 			);
-			var_dump($sql);
 			if(!$db->query($sql)) die("Ошибка добавления данных: ". $db->connect_errno);
 		}
 
