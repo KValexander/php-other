@@ -63,7 +63,7 @@
 
 	<header>
 		<div class="content">
-			<a href="index.html"><h1>Книги</h1></a>
+			<a href="../../index.html"><h1>Книги</h1></a>
 			<nav>
 				<a href="../books.php">Книги</a> |
 				<a href="../authors.php">Авторы</a> |

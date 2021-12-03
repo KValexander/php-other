@@ -20,7 +20,7 @@
 		$row["patronymic"],
 		$row["description"]);
 	}
-	if($data == "") $data = "<tr><td colspan=6>Данные отсутствуют</td></tr>";
+	if($data == "") $data = "<tr><td colspan=4>Данные отсутствуют</td></tr>";
 
 ?>
 
@@ -37,7 +37,7 @@
 
 	<header>
 		<div class="content">
-			<a href="index.html"><h1>Книги</h1></a>
+			<a href="../index.html"><h1>Книги</h1></a>
 			<nav>
 				<a href="books.php">Книги</a> |
 				<a href="authors.php">Авторы</a> |

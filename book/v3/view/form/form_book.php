@@ -1,4 +1,5 @@
 <?php
+	include "../../controller/auth_check.php";
 	require "../../connect.php";
 
 	if(count($_POST) != 0) {
@@ -104,12 +105,25 @@
 
 	<header>
 		<div class="content">
-			<a href="../../index.html"><h1>Книги</h1></a>
+			<a href="../../index.php"><h1>Книги</h1></a>
 			<nav>
 				<a href="../books.php">Книги</a> |
 				<a href="../authors.php">Авторы</a> |
 				<a href="../publishers.php">Издатели</a> |
-				<a href="../console.php">Консоль</a>
+				<?php 
+					if ($auth) {
+						print('
+							<a href="../console.php">Консоль</a> |
+							<a href="../profile.php">Личный кабинет</a> |
+							<a href="../../controller/logout.php">Выйти</a>
+						');
+					} else {
+						print('
+							<a href="../auth/register.php">Регистрация</a> |
+							<a href="../auth/login.php">Вход</a>
+						');
+					}
+				?>
 			</nav>
 		</div>
 	</header>

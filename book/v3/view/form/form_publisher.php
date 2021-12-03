@@ -1,26 +1,24 @@
 <?php
+	include "../../controller/auth_check.php";
 	require "../../connect.php";
 
 	if(count($_POST) != 0) {
-		$surname = htmlentities(trim($_POST["surname"]));
 		$name = htmlentities(trim($_POST["name"]));
-		$patronymic = htmlentities(trim($_POST["patronymic"]));
+		$year_foundation = htmlentities(trim($_POST["year_foundation"]));
 		$description = htmlentities(trim($_POST["description"]));
 
-		if (isset($_GET["author_id"])) {
-			$sql = sprintf("UPDATE `author` SET `surname`='%s', `name`='%s', `patronymic`='%s', `description`='%s' WHERE `author_id`='%s'",
-				$db->real_escape_string($surname),
+		if (isset($_GET["publisher_id"])) {
+			$sql = sprintf("UPDATE `publisher` SET `name`='%s', `year_foundation`='%s', `description`='%s' WHERE `publisher_id`='%s'",
 				$db->real_escape_string($name),
-				$db->real_escape_string($patronymic),
+				$db->real_escape_string($year_foundation),
 				$db->real_escape_string($description),
-				$_GET["author_id"]
+				$_GET["publisher_id"]
 			);
 			if(!$db->query($sql)) die("Ошибка изменения данных: ". $db->connect_errno);
 		} else {
-			$sql = sprintf("INSERT INTO `author` VALUES(NULL, '%s', '%s', '%s', '%s')",
-				$db->real_escape_string($surname),
+			$sql = sprintf("INSERT INTO `publisher` VALUES(NULL, '%s', '%s', '%s')",
 				$db->real_escape_string($name),
-				$db->real_escape_string($patronymic),
+				$db->real_escape_string($year_foundation),
 				$db->real_escape_string($description)
 			);
 			if(!$db->query($sql)) die("Ошибка добавления данных: ". $db->connect_errno);
@@ -30,26 +28,24 @@
 		exit;
 
 	} else {
-		$head = "Добавление автора";
+		$head = "Добавление издателя";
 		$value = "Добавить";
 
-		$surname = "";
 		$name = "";
-		$patronymic = "";
+		$year_foundation = "";
 		$description = "";
 
-		if (isset($_GET["author_id"])) {
-			$head = "Изменение автора";
+		if (isset($_GET["publisher_id"])) {
+			$head = "Изменение издателя";
 			$value = "Изменить";
 
-			$sql = "SELECT * FROM `author` WHERE `author_id`='". $_GET["author_id"] ."'";
+			$sql = "SELECT * FROM `publisher` WHERE `publisher_id`='". $_GET["publisher_id"] ."'";
 			$result = $db->query($sql);
 			if(!$result) die("Ошибка получения данных: ". $db->connect_errno);
 			$row = $result->fetch_assoc();
 
-			$surname = $row["surname"];
 			$name = $row["name"];
-			$patronymic = $row["patronymic"];
+			$year_foundation = $row["year_foundation"];
 			$description = $row["description"];
 		}
 	}
@@ -68,12 +64,25 @@
 
 	<header>
 		<div class="content">
-			<a href="../../index.html"><h1>Книги</h1></a>
+			<a href="../../index.php"><h1>Книги</h1></a>
 			<nav>
 				<a href="../books.php">Книги</a> |
 				<a href="../authors.php">Авторы</a> |
 				<a href="../publishers.php">Издатели</a> |
-				<a href="../console.php">Консоль</a>
+				<?php 
+					if ($auth) {
+						print('
+							<a href="../console.php">Консоль</a> |
+							<a href="../profile.php">Личный кабинет</a> |
+							<a href="../../controller/logout.php">Выйти</a>
+						');
+					} else {
+						print('
+							<a href="../auth/register.php">Регистрация</a> |
+							<a href="../auth/login.php">Вход</a>
+						');
+					}
+				?>
 			</nav>
 		</div>
 	</header>
@@ -85,9 +94,8 @@
 			</div>
 
 			<form method="POST">
-				<input type="text" placeholder="Фамилия" name="surname" value="<?= $surname ?>">
 				<input type="text" placeholder="Имя" name="name" value="<?= $name ?>">
-				<input type="text" placeholder="Отчество" name="patronymic" value="<?= $patronymic ?>">
+				<input type="number" placeholder="Год основания" name="year_foundation" value="<?= $year_foundation ?>">
 				<textarea name="description" placeholder="Описание"><?= $description ?></textarea>
 				<input type="submit" value="<?= $value ?>">
 			</form>

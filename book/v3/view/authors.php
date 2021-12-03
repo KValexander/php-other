@@ -1,24 +1,28 @@
 <?php
+	include "../controller/auth.php";
 	require "../connect.php";
 
-	$sql = "SELECT * FROM `publisher`";
+	$sql = "SELECT * FROM `author`";
 	$result = $db->query($sql);
 	if(!$result) die("Ошибка извлечения данных: ". $db->connect_errno);
 	$data = "";
 	while($row = $result->fetch_assoc()) {
 		$data .= sprintf("
 			<tr>
-				<td><a href='books.php?publisher_id=%s'>%s</a></td>
+				<td><a href='books.php?author_id=%s'>%s</a></td>
+				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 			</tr>
 		",
-		$row["publisher_id"],
+		$row["author_id"],
+		$row["surname"],
 		$row["name"],
-		$row["year_foundation"],
+		$row["patronymic"],
 		$row["description"]);
 	}
-	if($data == "") $data = "<tr><td colspan=3>Данные отсутствуют</td></tr>";
+	if($data == "") $data = "<tr><td colspan=4>Данные отсутствуют</td></tr>";
+
 ?>
 
 <!DOCTYPE html>
@@ -31,14 +35,28 @@
 </head>
 <body>
 
+
 	<header>
 		<div class="content">
-			<a href="../index.html"><h1>Книги</h1></a>
+			<a href="../index.php"><h1>Книги</h1></a>
 			<nav>
 				<a href="books.php">Книги</a> |
 				<a href="authors.php">Авторы</a> |
 				<a href="publishers.php">Издатели</a> |
-				<a href="console.php">Консоль</a>
+				<?php 
+					if ($auth) {
+						print('
+							<a href="console.php">Консоль</a> |
+							<a href="profile.php">Личный кабинет</a> |
+							<a href="../controller/logout.php">Выйти</a>
+						');
+					} else {
+						print('
+							<a href="auth/register.php">Регистрация</a> |
+							<a href="auth/login.php">Вход</a>
+						');
+					}
+				?>
 			</nav>
 		</div>
 	</header>
@@ -46,13 +64,14 @@
 	<main>
 		<div class="content">
 			<div class="head">
-				<h2>Издатели</h2>
+				<h2>Авторы</h2>
 			</div>
 
 			<table>
 				<tr>
+					<th>Фамилия</th>
 					<th>Имя</th>
-					<th>Год основания</th>
+					<th>Отчество</th>
 					<th>Описание</th>
 				</tr>
 				<?= $data ?>

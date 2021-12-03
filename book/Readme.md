@@ -1,1 +1,1 @@
-Project for a complex differentiated offset
+The code was written specifically for the possibility of further optimization and improvement.

@@ -1,3 +1,5 @@
+<?php include "controller/auth.php"; ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -10,12 +12,25 @@
 
 	<header>
 		<div class="content">
-			<a href="index.html"><h1>Книги</h1></a>
+			<a href="index.php"><h1>Книги</h1></a>
 			<nav>
 				<a href="view/books.php">Книги</a> |
 				<a href="view/authors.php">Авторы</a> |
 				<a href="view/publishers.php">Издатели</a> |
-				<a href="view/console.php">Консоль</a>
+				<?php 
+					if ($auth) {
+						print('
+							<a href="view/console.php">Консоль</a> |
+							<a href="view/profile.php">Личный кабинет</a> |
+							<a href="controller/logout.php">Выйти</a>
+						');
+					} else {
+						print('
+							<a href="view/auth/register.php">Регистрация</a> |
+							<a href="view/auth/login.php">Вход</a>
+						');
+					}
+				?>
 			</nav>
 		</div>
 	</header>
