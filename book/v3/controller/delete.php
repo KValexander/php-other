@@ -1,5 +1,6 @@
 <?php
 	require "../connect.php";
+	include "auth_check.php";
 
 	if(isset($_GET["book_id"])) {
 		$sql = "DELETE FROM `book` WHERE `book_id`='". $_GET["book_id"] ."'";
