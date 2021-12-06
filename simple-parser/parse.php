@@ -32,7 +32,7 @@ function getContent($reg, $content) {
 }
 
 // Обращение к сайту
-$data = file_get_contents("http://parserlocal/local");
+$data = file_get_contents("http://parser/local");
 // demo($data);
 
 // Получение секции новостей
@@ -42,10 +42,10 @@ $news = getContent("<a href=\".*?\" class=\".*?\">(.*?)</a>", $news[0]);
 
 // Получение секции туров
 $tours = getShell("<section class=\"tour\">(.*?)</section>", $data);
-$tours = getContent("(<div class=\"card\">.*?</div>)?", $tours[0]);
+$tours = getContent("<div class=\"card\">.*?</div>", $tours[0]);
 // demo($tours, true);
 
 // Получение секции партнёров
 $partners = getShell("<section  class=\"partners\">(.*?)</section>", $data);
-$partners = getContent("(<tr>.*?</tr>)?", $partners[0]);
+$partners = getContent("<tr>.*?</tr>", $partners[0]);
 // demo($partners, true);
