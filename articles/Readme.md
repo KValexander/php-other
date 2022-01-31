@@ -1,0 +1,1 @@
+Displaying images in an article using a shortcode
