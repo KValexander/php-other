@@ -6,5 +6,11 @@
 	if(!$connect->query($sql))
 		return die("Ошибка удаления данных ". $connect->error);
 
-	echo "<p>$sql</p>";
-	echo "<p>Запись с id $_GET[id] удалена</p>";
+?>
+
+<h2>Удаление записи</h2>
+<p><?= $sql ?></p>
+
+<p>Запись с id <?= $_GET["id"] ?> удалена</p>
+
+<p><a href="select.php">Вернуться</a></p>

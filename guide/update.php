@@ -5,6 +5,11 @@
 
 	if(!$connect->query($sql))
 		return die("Ошибка обновления данных ". $connect->error);
+?>
 
-	echo "<p>$sql</p>";
-	echo "<p>Запись с id $_GET[id] обновлена</p>";
+<h2>Изменение записи</h2>
+<p><?= $sql ?></p>
+
+<p>Запись с id <?= $_GET["id"] ?> обновлена</p>
+
+<p><a href="select.php">Вернуться</a></p>

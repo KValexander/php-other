@@ -30,8 +30,14 @@
 	if(!$data)
 		$data = '<tr><td colspan="3">Данные отсутствуют</td></tr>';
 
-	echo "<p>SELECT * FROM `table`</p>";
 ?>
+
+<h2>Все записи</h2>
+<p><?= $sql ?></p>
+
+<p><a href="insert.php">Добавить запись</a></p>
+<p><a href="out_image.php">Все изображения</a></p>
+
 <table>
 	<tr>
 		<th>id</th>
@@ -43,5 +49,3 @@
 	</tr>
 	<?= $data ?>
 </table>
-
-<p><a href="insert.php">Добавить запись</a></p>

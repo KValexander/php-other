@@ -1,20 +1,15 @@
-@extends("layout")
-
 <!-- 
 	web.php
 	--------------
 		Route::get("/select", [MainController::class, "select_page"]);
-
+		
 	MainController.php
 	--------------
 		public function select_page() {
 			$content = DB::table("table")->get();
 			return view("select", ["content" => $content]);
 		}
-
 -->
-
-@section("content")
 	
 	<table>
 		<tr>
@@ -38,4 +33,3 @@
 
 	</table>
 
-@endsection

@@ -6,5 +6,10 @@
 	if(!$connect->query($sql))
 		return die("Ошибка добавления данных ". $connect->error);
 
-	echo "<p>$sql</p>";
-	echo "<p>Запись добавлена с id - ". $connect->insert_id ."</p>";
+?>
+
+<h2>Добавление записи</h2>
+<p><?= $sql ?></p>
+
+<p>Запись добавлена с id <?= $connect->insert_id ?></p>
+<p><a href="select.php">Вернуться</a></p>
