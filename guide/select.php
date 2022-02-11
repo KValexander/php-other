@@ -36,7 +36,8 @@
 <p><?= $sql ?></p>
 
 <p><a href="insert.php">Добавить запись</a></p>
-<p><a href="out_image.php">Все изображения</a></p>
+<p><a href="images/out_image.php">Все изображения</a></p>
+<p><a href="auth/login.php">Войти</a></p>
 
 <table>
 	<tr>

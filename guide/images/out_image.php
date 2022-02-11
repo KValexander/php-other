@@ -1,5 +1,5 @@
 <?php
-	include "connect.php";
+	include "../connect.php";
 	
 	$sql = "SELECT * FROM `table` WHERE `field_2`='image'";
 
@@ -18,7 +18,7 @@
 <p><?= $sql ?></p>
 
 <p><a href="add_image.php">Добавить изображение</a></p>
-<p><a href="select.php">Все записи</a></p>
+<p><a href="../select.php">Все записи</a></p>
 
 <div style="display:flex;flex-wrap:wrap;">
 	<?= $images ?>

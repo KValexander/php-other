@@ -1,5 +1,5 @@
 <?php 
-	include "connect.php";
+	include "../connect.php";
 
 	if($_FILES) {
 		// Первый вариант - чуть сложнее третьего
