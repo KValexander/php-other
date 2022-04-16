@@ -38,7 +38,7 @@
 
 	$orders = "";
 	while($row = $result->fetch_assoc()) {
-		$del = ($row["status"] == "Новый") ? '<a class="text-small">Удалить заказ</a>' : "";
+		$del = ($row["status"] == "Новый") ? '<a onclick="return confirm(\'Вы действительно хотите удалить заказ?\')" href="controllers/delete_order.php?id='.$row["order_id"].'" class="text-small">Удалить заказ</a>' : "";
 		
 		$reason = ($row["status"] == "Отменённый") ? '
 			<p class="text-center"><b>Причина отмены</b></p>

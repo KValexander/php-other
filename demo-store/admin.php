@@ -1,5 +1,15 @@
 <?php
 	include "controllers/check_admin.php";
+	include "connect.php";
+
+	$sql = "SELECT * FROM `categories`";
+	if(!$result = $connect->query($sql))
+		return die("Ошибка получения данных: ". $connect->error);
+
+	$categories = "";
+	while($row = $result->fetch_assoc())
+		$categories .= sprintf("<option value='%s'>%s</option>", $row["category_id"], $row["category"]);
+	
 	include "header.php";
 ?>
 
@@ -8,17 +18,18 @@
 
 			<div class="head">Категории</div>
 			
-			<form>
+			<form action="controllers/add_category.php" method="POST">
 				<div class="part">
 					<input type="text" placeholder="Категория" name="category" required>
 					<button>Добавить</button>
 				</div>
 			</form>
 
-			<form>
+			<form action="controllers/delete_category.php" method="POST">
 				<div class="part">
 					<select name="category_id" required>
 						<option value selected disabled>Категории</option>
+						<?= $categories ?>
 					</select>
 					<button>Удалить</button>
 				</div>
