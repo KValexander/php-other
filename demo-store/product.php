@@ -39,7 +39,7 @@ include "header.php";
 							echo '
 								<div class="row text-small">
 									<p>Редактировать</p>
-									<p>Удалить</p>
+									<p><a class="text-small" href="controllers/remove_product.php?id='. $product["product_id"] .'">Удалить</a></p>
 								</div>
 								<p class="text-right"><a class="text-small" href="controllers/add_product.php?id='. $product["product_id"] .'">В корзину</a></p>
 							';

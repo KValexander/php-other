@@ -4,6 +4,16 @@ include "connect.php";
 	
 	$role = (isset($_SESSION["role"])) ? $_SESSION["role"] : "guest";
 
+	// Получение категорий
+	$sql = "SELECT * FROM `categories`";
+	if(!$result = $connect->query($sql))
+		return die("Ошибка получения данных: ". $connect->error);
+
+	$categories = "";
+	while($row = $result->fetch_assoc())
+		$categories .= sprintf("<option value='%s'>%s</option>", $row["category_id"], $row["category"]);
+
+	// Получение товаров
 	$sql = "SELECT * FROM `products` WHERE `count`!=0 ORDER BY `created_at` DESC";
 	$result = $connect->query($sql);
 	if(!$result)
@@ -40,9 +50,7 @@ include "header.php";
 				<div>
 					<select>
 						<option selected disabled>Категории</option>
-						<option>Лазерные принтеры</option>
-						<option>Струйные принтеры</option>
-						<option>Термопринтеры</option>
+						<?= $categories ?>
 					</select>
 				</div>
 			</div>
